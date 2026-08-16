@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Portafolio artístico de Juan García — pintura, fotografía y escultura."
+  >
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Juan García — Artista · Pintura · Fotografía · Escultura">
+  <meta property="og:description" content="Portafolio artístico de Juan García — pintura, fotografía y escultura.">
+  <meta property="og:image" content="imagen/perfil.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="#0b1820">
+  <link rel="icon" href="data:,">
+
+  <title>Juan García — Artista · Pintura · Fotografía · Escultura</title>
+
+  <!-- =========================
+       GOOGLE FONTS
+  ========================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* =====================================================
+       VARIABLES
+    ====================================================== */
+
+    :root {
+      --background: #0b1820;
+      --background-deep: #071117;
+
+      --foreground: #ffffff;
+      --off-white: #eeeae3;
+
+      --muted: #a7a9ad;
+      --stone: #85888b;
+
+      --sand: #c9b79c;
+
+      --border: rgba(255, 255, 255, 0.14);
+
+      --glass: rgba(255, 255, 255, 0.035);
+
+      --font-display: "Instrument Serif", serif;
+      --font-body: "Inter", sans-serif;
+    }
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--background-deep);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ::selection {
+      background: var(--sand);
+      color: #111;
+    }
+
+    /* Foco visible accesible en toda la página */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--sand);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      z-index: 200;
+      padding: 10px 18px;
+      background: var(--off-white);
+      color: #111;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: top 0.25s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+
+    /* =====================================================
+       TYPOGRAPHY
+    ====================================================== */
+
+    .display {
+      font-family: var(--font-display);
+      font-weight: 400;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+
+    /* =====================================================
+       LIQUID GLASS
+    ====================================================== */
+
+    .liquid-glass {
+      position: relative;
+      overflow: hidden;
+
+      background: rgba(255, 255, 255, 0.025);
+      background-blend-mode: luminosity;
+
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+
+      border: 1px solid rgba(255, 255, 255, 0.10);
+
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.10),
+        0 12px 40px rgba(0, 0, 0, 0.15);
+
+      transition: background 0.35s ease, backdrop-filter 0.35s ease;
+    }
+
+    .liquid-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      border-radius: inherit;
+
+      padding: 1px;
+
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.38) 0%,
+        rgba(255,255,255,0.12) 20%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.10) 80%,
+        rgba(255,255,255,0.28) 100%
+      );
+
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+      pointer-events: none;
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    .site-nav {
+      position: fixed;
+
+      top: 22px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: min(92%, 1180px);
+
+      z-index: 100;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 10px 12px 10px 22px;
+
+      border-radius: 28px;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 2;
+
+      text-decoration: none;
+
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+
+      line-height: 1;
+
+      letter-spacing: -0.03em;
+
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--sand);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      display: block;
+
+      padding: 9px 14px;
+
+      text-decoration: none;
+
+      color: var(--muted);
+
+      font-size: 0.72rem;
+      font-weight: 400;
+
+      transition:
+        color 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--foreground);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: 2px;
+      left: 50%;
+
+      width: 4px;
+      height: 4px;
+
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background: var(--sand);
+    }
+
+    .nav-cta {
+      position: relative;
+      z-index: 2;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 40px;
+
+      padding: 0 18px;
+
+      border-radius: 999px;
+
+      text-decoration: none;
+
+      color: var(--foreground);
+
+      font-size: 0.7rem;
+      font-weight: 500;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.03);
+      background: rgba(255,255,255,0.08);
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    .menu-button {
+      display: none;
+
+      position: relative;
+      z-index: 3;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.03);
+
+      color: white;
+    }
+
+    .menu-button span,
+    .menu-button span::before,
+    .menu-button span::after {
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+
+      width: 16px;
+      height: 1px;
+
+      background: white;
+
+      transform: translateX(-50%);
+
+      transition: transform 0.3s ease, opacity 0.3s ease, top 0.3s ease;
+    }
+
+    .menu-button span {
+      top: 20px;
+    }
+
+    .menu-button span::before {
+      top: -6px;
+    }
+
+    .menu-button span::after {
+      top: 6px;
+    }
+
+    /* Estado abierto: la línea central se oculta y las otras forman una X */
+    .site-nav.menu-open .menu-button span {
+      background: transparent;
+    }
+
+    .site-nav.menu-open .menu-button span::before {
+      top: 0;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .site-nav.menu-open .menu-button span::after {
+      top: 0;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    /* Panel desplegable móvil (oculto en escritorio) */
+    .mobile-panel {
+      display: none;
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .hero {
+      position: relative;
+
+      min-height: 100svh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      isolation: isolate;
+
+      background: var(--background);
+    }
+
+    .hero-image {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -3;
+
+      background:
+        url("imagen/perfil.jpg")
+        center center / cover
+        no-repeat;
+
+      transform: scale(1.02);
+
+      animation: hero-breathe 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes hero-breathe {
+      from {
+        transform: scale(1.02);
+      }
+
+      to {
+        transform: scale(1.06);
+      }
+    }
+
+
+    /* =====================================================
+       CINEMATIC DARKNESS
+    ====================================================== */
+
+    .hero-overlay {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -2;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5, 12, 16, 0.50) 0%,
+          rgba(5, 12, 16, 0.12) 35%,
+          rgba(5, 12, 16, 0.32) 60%,
+          rgba(5, 12, 16, 0.90) 100%
+        );
+
+      pointer-events: none;
+    }
+
+    .hero-vignette {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.38),
+          transparent 40%,
+          rgba(0,0,0,0.18)
+        );
+
+      pointer-events: none;
+    }
+
+
+    /* =====================================================
+       HERO CONTENT
+    ====================================================== */
+
+    .hero-content {
+      width: min(1180px, 92%);
+
+      padding:
+        150px
+        0
+        120px;
+
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      color: rgba(255,255,255,0.72);
+
+      margin-bottom: 28px;
+    }
+
+    .hero-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--sand);
+
+      box-shadow:
+        0 0 15px rgba(201,183,156,0.7);
+    }
+
+    .hero-title {
+      max-width: 1050px;
+
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        4rem,
+        10vw,
+        9.5rem
+      );
+
+      font-weight: 400;
+
+      line-height: 0.82;
+
+      letter-spacing: -0.045em;
+
+      color: var(--foreground);
+    }
+
+    .hero-title .muted {
+      color: rgba(255,255,255,0.60);
+      font-style: italic;
+    }
+
+    .hero-description {
+      max-width: 640px;
+
+      margin-top: 38px;
+
+      color: rgba(255,255,255,0.70);
+
+      font-size: clamp(
+        0.92rem,
+        1.5vw,
+        1.08rem
+      );
+
+      line-height: 1.75;
+    }
+
+    .hero-disciplines {
+      margin-top: 26px;
+
+      color: var(--sand);
+
+      font-size: 0.68rem;
+
+      font-weight: 500;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =====================================================
+       HERO BUTTON
+    ====================================================== */
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      margin-top: 42px;
+    }
+
+    .primary-button {
+      position: relative;
+      z-index: 1;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      padding: 15px 30px;
+
+      border-radius: 999px;
+
+      text-decoration: none;
+
+      color: #111;
+
+      background: var(--off-white);
+
+      font-size: 0.75rem;
+      font-weight: 500;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .primary-button:hover {
+      transform: scale(1.03);
+
+      background: white;
+    }
+
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 15px 24px;
+
+      border-radius: 999px;
+
+      text-decoration: none;
+
+      color: rgba(255,255,255,0.82);
+
+      font-size: 0.75rem;
+
+      border: 1px solid rgba(255,255,255,0.16);
+
+      transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .secondary-button:hover {
+      color: white;
+
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+
+    /* =====================================================
+       SCROLL INDICATOR
+    ====================================================== */
+
+    .scroll-indicator {
+      position: absolute;
+
+      bottom: 30px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: rgba(255,255,255,0.55);
+
+      font-size: 0.6rem;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      position: relative;
+
+      width: 42px;
+      height: 1px;
+
+      overflow: hidden;
+
+      background: rgba(255,255,255,0.25);
+    }
+
+    .scroll-line::after {
+      content: "";
+
+      position: absolute;
+
+      left: -100%;
+
+      top: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: white;
+
+      animation: scroll-line 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scroll-line {
+      0% {
+        left: -100%;
+      }
+
+      50% {
+        left: 100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+
+    /* =====================================================
+       GENERAL SECTIONS
+    ====================================================== */
+
+    section {
+      position: relative;
+
+      padding:
+        clamp(90px, 12vw, 160px)
+        6vw;
+    }
+
+    .section-container {
+      width: min(1180px, 100%);
+
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      gap: 30px;
+
+      margin-bottom: 70px;
+
+      padding-bottom: 22px;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,0.10);
+    }
+
+    .section-label {
+      color: var(--sand);
+
+      font-size: 0.65rem;
+
+      font-weight: 500;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin-top: 12px;
+
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        2.8rem,
+        6vw,
+        5.5rem
+      );
+
+      line-height: 0.9;
+
+      font-weight: 400;
+
+      letter-spacing: -0.035em;
+    }
+
+    .section-number {
+      color: var(--stone);
+
+      font-size: 0.65rem;
+
+      letter-spacing: 0.12em;
+    }
+
+
+    /* =====================================================
+       ABOUT
+    ====================================================== */
+
+    .about-section {
+      background: var(--background-deep);
+    }
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(280px, 0.85fr)
+        minmax(320px, 1.15fr);
+
+      gap: clamp(50px, 9vw, 120px);
+
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+
+      aspect-ratio: 3 / 4;
+
+      overflow: hidden;
+
+      background: #111;
+
+      border-radius: 4px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      filter: saturate(0.85);
+
+      transition:
+        transform 0.8s ease,
+        filter 0.8s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.04);
+
+      filter: saturate(1);
+    }
+
+    .about-image::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 55%,
+          rgba(0,0,0,0.45)
+        );
+    }
+
+    .about-content {
+      max-width: 620px;
+    }
+
+    .about-heading {
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        2.5rem,
+        4.5vw,
+        4.4rem
+      );
+
+      font-weight: 400;
+
+      line-height: 0.95;
+
+      letter-spacing: -0.03em;
+
+      margin-bottom: 28px;
+    }
+
+    .about-text {
+      color: var(--muted);
+
+      font-size: 0.96rem;
+
+      line-height: 1.85;
+
+      margin-bottom: 34px;
+    }
+
+    .discipline-list {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+    }
+
+    .discipline-list span {
+      padding: 9px 15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius: 999px;
+
+      color: rgba(255,255,255,0.78);
+
+      font-size: 0.7rem;
+    }
+
+
+    /* =====================================================
+       WORK
+    ====================================================== */
+
+    .work-section {
+      background: #0a151c;
+    }
+
+    .work-intro {
+      max-width: 620px;
+
+      color: var(--muted);
+
+      line-height: 1.75;
+
+      margin-bottom: 55px;
+    }
+
+    .work-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 2px;
+
+      background:
+        rgba(255,255,255,0.08);
+    }
+
+    .work-card {
+      position: relative;
+
+      min-height: 600px;
+
+      overflow: hidden;
+
+      background: #111;
+
+      text-decoration: none;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 30px;
+
+      isolation: isolate;
+    }
+
+    .work-image {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -2;
+
+      background-size: cover;
+
+      background-position: center;
+
+      transition:
+        transform 0.8s cubic-bezier(.2,.7,.2,1),
+        filter 0.8s ease;
+    }
+
+    .work-card:nth-child(1) .work-image {
+      background-image:
+        url("imagen/pintura-01.jpg");
+    }
+
+    .work-card:nth-child(2) .work-image {
+      background-image:
+        url("imagen/fotografia-01.jpg");
+    }
+
+    .work-card:nth-child(3) .work-image {
+      background-image:
+        url("imagen/escultura-01.jpg");
+    }
+
+    .work-card:hover .work-image,
+    .work-card:focus-visible .work-image {
+      transform: scale(1.07);
+
+      filter: saturate(1.08);
+    }
+
+    .work-overlay {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 25%,
+          rgba(0,0,0,0.82) 100%
+        );
+    }
+
+    .work-content {
+      width: 100%;
+    }
+
+    .work-number {
+      display: block;
+
+      margin-bottom: 12px;
+
+      color: var(--sand);
+
+      font-size: 0.65rem;
+
+      letter-spacing: 0.18em;
+
+      font-weight: 500;
+    }
+
+    .work-title {
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        2.2rem,
+        4vw,
+        3.8rem
+      );
+
+      font-weight: 400;
+
+      line-height: 0.9;
+    }
+
+    .work-description {
+      margin-top: 12px;
+
+      max-width: 240px;
+
+      color: rgba(255,255,255,0.65);
+
+      font-size: 0.75rem;
+
+      line-height: 1.6;
+    }
+
+    .work-arrow {
+      position: absolute;
+
+      top: 24px;
+      right: 24px;
+
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+      border-radius: 50%;
+
+      color: white;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .work-card:hover .work-arrow,
+    .work-card:focus-visible .work-arrow {
+      background: var(--off-white);
+
+      color: #111;
+
+      transform: rotate(45deg);
+    }
+
+
+    /* =====================================================
+       FEATURED WORK
+    ====================================================== */
+
+    .featured-section {
+      background: var(--background-deep);
+    }
+
+    .featured-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(300px, 0.65fr);
+
+      gap: clamp(40px, 8vw, 100px);
+
+      align-items: center;
+    }
+
+    .featured-image {
+      aspect-ratio: 4 / 3;
+
+      overflow: hidden;
+
+      background: #111;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition:
+        transform 0.8s ease;
+    }
+
+    .featured-image:hover img {
+      transform: scale(1.03);
+    }
+
+    .featured-info .eyebrow {
+      color: var(--sand);
+
+      display: block;
+
+      margin-bottom: 20px;
+    }
+
+    .featured-title {
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        3rem,
+        5vw,
+        5rem
+      );
+
+      font-weight: 400;
+
+      line-height: 0.9;
+
+      margin-bottom: 25px;
+    }
+
+    .featured-meta {
+      color: var(--stone);
+
+      font-size: 0.78rem;
+
+      line-height: 1.8;
+
+      margin-bottom: 25px;
+    }
+
+    .featured-description {
+      color: var(--muted);
+
+      font-size: 0.9rem;
+
+      line-height: 1.8;
+
+      margin-bottom: 30px;
+    }
+
+    .text-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      text-decoration: none;
+
+      color: white;
+
+      font-size: 0.75rem;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,0.35);
+
+      padding-bottom: 5px;
+
+      transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .text-link:hover {
+      color: var(--sand);
+
+      border-color: var(--sand);
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ====================================================== */
+
+    .contact-section {
+      background: #071117;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.08);
+    }
+
+    .contact-inner {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      align-items: end;
+
+      gap: 50px;
+    }
+
+    .contact-title {
+      max-width: 850px;
+
+      font-family: var(--font-display);
+
+      font-size: clamp(
+        3.2rem,
+        7vw,
+        7rem
+      );
+
+      font-weight: 400;
+
+      line-height: 0.86;
+
+      letter-spacing: -0.04em;
+    }
+
+    .contact-text {
+      max-width: 540px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+    }
+
+    .contact-side {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: flex-start;
+
+      gap: 25px;
+    }
+
+    .contact-button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 17px 28px;
+
+      border-radius: 999px;
+
+      background: var(--off-white);
+
+      color: #111;
+
+      text-decoration: none;
+
+      font-size: 0.75rem;
+
+      font-weight: 500;
+
+      transition:
+        transform 0.3s ease;
+    }
+
+    .contact-button:hover {
+      transform: scale(1.03);
+    }
+
+    .socials {
+      display: flex;
+
+      gap: 20px;
+    }
+
+    .socials a {
+      color: var(--stone);
+
+      text-decoration: none;
+
+      font-size: 0.72rem;
+
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: white;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    footer {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding:
+        28px 6vw
+        35px;
+
+      color: var(--stone);
+
+      font-size: 0.68rem;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.07);
+    }
+
+
+    /* =====================================================
+       REVEAL ANIMATION
+    ====================================================== */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(35px);
+
+      transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(.16,.8,.24,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.12s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.22s;
+    }
+
+
+    /* =====================================================
+       HERO INTRO ANIMATION
+    ====================================================== */
+
+    @keyframes fade-rise {
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+    .animate-fade-rise {
+      animation:
+        fade-rise
+        0.9s
+        ease-out
+        both;
+    }
+
+    .animate-fade-rise-delay {
+      animation:
+        fade-rise
+        0.9s
+        ease-out
+        0.2s
+        both;
+    }
+
+    .animate-fade-rise-delay-2 {
+      animation:
+        fade-rise
+        0.9s
+        ease-out
+        0.4s
+        both;
+    }
+
+    .animate-fade-rise-delay-3 {
+      animation:
+        fade-rise
+        0.9s
+        ease-out
+        0.6s
+        both;
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (max-width: 900px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .site-nav {
+        padding: 9px 10px 9px 18px;
+        flex-wrap: wrap;
+      }
+
+      /* Panel desplegable: aparece debajo de la barra al activar el menú */
+      .mobile-panel {
+        display: block;
+
+        width: 100%;
+
+        max-height: 0;
+        overflow: hidden;
+
+        opacity: 0;
+
+        transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+      }
+
+      .site-nav.menu-open .mobile-panel {
+        max-height: 320px;
+        opacity: 1;
+        margin-top: 14px;
+      }
+
+      .mobile-panel ul {
+        list-style: none;
+
+        display: flex;
+        flex-direction: column;
+
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 14px;
+      }
+
+      .mobile-panel a {
+        display: block;
+
+        padding: 12px 4px;
+
+        text-decoration: none;
+
+        color: var(--off-white);
+
+        font-size: 0.9rem;
+      }
+
+      .mobile-panel .nav-cta {
+        display: inline-flex;
+        margin-top: 8px;
+        background: rgba(255,255,255,0.08);
+      }
+
+      .hero-content {
+        padding-top: 130px;
+        padding-bottom: 100px;
+      }
+
+      .hero-title {
+        font-size: clamp(
+          4rem,
+          17vw,
+          7rem
+        );
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        max-width: 500px;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card {
+        min-height: 520px;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    @media (max-width: 600px) {
+
+      section {
+        padding:
+          90px 6vw;
+      }
+
+      .hero-image {
+        background-position:
+          50% center;
+      }
+
+      .hero-title {
+        font-size: clamp(
+          4rem,
+          19vw,
+          6.5rem
+        );
+
+        line-height: 0.82;
+      }
+
+      .hero-description {
+        font-size: 0.9rem;
+
+        max-width: 360px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+
+        width: 100%;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+      }
+
+      .section-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        margin-bottom: 45px;
+      }
+
+      .work-card {
+        min-height: 460px;
+      }
+
+      .contact-title {
+        font-size: 3.8rem;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ====================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .hero-image {
+        animation: none;
+      }
+
+      .reveal {
+        opacity: 1;
+
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Enlace de salto para lectores de pantalla y navegación por teclado -->
+  <a href="#perfil" class="skip-link">Saltar al contenido</a>
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <nav class="site-nav liquid-glass" id="site-nav">
+
+    <a href="#perfil" class="logo">
+      Juan <span>García</span>
+    </a>
+
+    <ul class="nav-links">
+
+      <li>
+        <a href="#perfil" class="active">
+          Perfil
+        </a>
+      </li>
+
+      <li>
+        <a href="#sobre-mi">
+          Sobre mí
+        </a>
+      </li>
+
+      <li>
+        <a href="#obra">
+          Obra
+        </a>
+      </li>
+
+      <li>
+        <a href="#contacto">
+          Contacto
+        </a>
+      </li>
+
+    </ul>
+
+    <a href="#obra" class="nav-cta liquid-glass">
+      Ver obra →
+    </a>
+
+    <button
+      class="menu-button"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-panel"
+    >
+      <span></span>
+    </button>
+
+    <!-- Panel de navegación para móvil -->
+    <div class="mobile-panel" id="mobile-panel">
+      <ul>
+        <li><a href="#perfil">Perfil</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#obra">Obra</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#obra" class="nav-cta liquid-glass">Ver obra →</a></li>
+      </ul>
+    </div>
+
+  </nav>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <header class="hero" id="perfil">
+
+    <!-- imagen/perfil.jpg es el fondo -->
+    <div class="hero-image" role="img" aria-label="Retrato de Juan García"></div>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-vignette" aria-hidden="true"></div>
+
+
+    <div class="hero-content">
+
+      <div class="hero-eyebrow animate-fade-rise">
+
+        <span class="hero-dot" aria-hidden="true"></span>
+
+        <span class="eyebrow">
+          Artista · Cartagena · 2026
+        </span>
+
+      </div>
+
+
+      <h1 class="hero-title animate-fade-rise-delay">
+
+        Juan García
+
+        <br>
+
+        <span class="muted">
+          La memoria también deja huellas.
+        </span>
+
+      </h1>
+
+
+      <p class="hero-description animate-fade-rise-delay-2">
+
+        Artista en formación que explora la pintura,
+        la fotografía y la escultura como distintas
+        formas de aproximarse a la memoria, la nostalgia,
+        la luz y la experiencia humana.
+
+      </p>
+
+
+      <div class="hero-disciplines animate-fade-rise-delay-2">
+
+        Pintura · Fotografía · Escultura
+
+      </div>
+
+
+      <div class="hero-actions animate-fade-rise-delay-3">
+
+        <a
+          href="#obra"
+          class="primary-button"
+        >
+          Explorar obra →
+        </a>
+
+        <a
+          href="#sobre-mi"
+          class="secondary-button"
+        >
+          Conocer al artista
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="scroll-indicator">
+
+      <span class="scroll-line"></span>
+
+      <span>
+        Scroll
+      </span>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       SOBRE MÍ
+  ====================================================== -->
+
+  <section
+    id="sobre-mi"
+    class="about-section"
+  >
+
+    <div class="section-container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <span class="section-label">
+            01 · Perfil
+          </span>
+
+          <h2 class="section-title">
+            Práctica artística
+          </h2>
+
+        </div>
+
+        <span class="section-number">
+          01 — 04
+        </span>
+
+      </div>
+
+
+      <div class="about-grid">
+
+        <div class="about-image reveal">
+
+          <img
+            src="imagen/perfil.jpg"
+            alt="Retrato de Juan García en su estudio"
+            loading="lazy"
+            width="900"
+            height="1200"
+          >
+
+        </div>
+
+
+        <div class="about-content reveal delay-1">
+
+          <h3 class="about-heading">
+            Una práctica,
+            distintas materias.
+          </h3>
+
+
+          <p class="about-text">
+
+            Mi práctica artística se mueve entre la
+            pintura, la fotografía y la escultura.
+            Cada medio permite aproximarme a una misma
+            inquietud desde una perspectiva diferente:
+            aquello que permanece en nosotros después
+            de que una experiencia termina.
+
+          </p>
+
+
+          <p class="about-text">
+
+            Trabajo especialmente alrededor de la
+            memoria, la nostalgia, la luz, la sombra
+            y la experiencia humana, buscando que cada
+            obra conserve algo de aquello que no puede
+            explicarse completamente con palabras.
+
+          </p>
+
+
+          <ul class="discipline-list">
+
+            <li>
+              Pintura
+            </li>
+
+            <li>
+              Fotografía
+            </li>
+
+            <li>
+              Escultura
+            </li>
+
+            <li>
+              Investigación visual
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       OBRA
+  ====================================================== -->
+
+  <section
+    id="obra"
+    class="work-section"
+  >
+
+    <div class="section-container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <span class="section-label">
+            02 · Portafolio
+          </span>
+
+          <h2 class="section-title">
+            Obra
+          </h2>
+
+        </div>
+
+        <span class="section-number">
+          02 — 04
+        </span>
+
+      </div>
+
+
+      <p class="work-intro reveal">
+
+        Tres disciplinas que funcionan como diferentes
+        caminos para explorar una misma pregunta:
+        ¿qué permanece cuando el instante ya terminó?
+
+      </p>
+
+
+      <div class="work-grid">
+
+
+        <!-- PINTURA -->
+
+        <a
+          href="obra-pintura.html"
+          class="work-card reveal"
+        >
+
+          <div
+            class="work-image"
+            aria-hidden="true"
+          ></div>
+
+          <div
+            class="work-overlay"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="work-arrow" aria-hidden="true">
+            ↗
+          </div>
+
+
+          <div class="work-content">
+
+            <span class="work-number">
+              01 · Pintura
+            </span>
+
+            <h3 class="work-title">
+              Pintura
+            </h3>
+
+            <p class="work-description">
+              Óleo, luz, memoria y figura.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <!-- FOTOGRAFÍA -->
+
+        <a
+          href="obra-fotografia.html"
+          class="work-card reveal delay-1"
+        >
+
+          <div
+            class="work-image"
+            aria-hidden="true"
+          ></div>
+
+          <div
+            class="work-overlay"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="work-arrow" aria-hidden="true">
+            ↗
+          </div>
+
+
+          <div class="work-content">
+
+            <span class="work-number">
+              02 · Fotografía
+            </span>
+
+            <h3 class="work-title">
+              Fotografía
+            </h3>
+
+            <p class="work-description">
+              Instantes, cuerpos y espacios suspendidos.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <!-- ESCULTURA -->
+
+        <a
+          href="obra-escultura.html"
+          class="work-card reveal delay-2"
+        >
+
+          <div
+            class="work-image"
+            aria-hidden="true"
+          ></div>
+
+          <div
+            class="work-overlay"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="work-arrow" aria-hidden="true">
+            ↗
+          </div>
+
+
+          <div class="work-content">
+
+            <span class="work-number">
+              03 · Escultura
+            </span>
+
+            <h3 class="work-title">
+              Escultura
+            </h3>
+
+            <p class="work-description">
+              Materia, cuerpo y transformación.
+            </p>
+
+          </div>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       OBRA DESTACADA
+  ====================================================== -->
+
+  <section class="featured-section">
+
+    <div class="section-container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <span class="section-label">
+            03 · Selección
+          </span>
+
+          <h2 class="section-title">
+            Obra destacada
+          </h2>
+
+        </div>
+
+        <span class="section-number">
+          03 — 04
+        </span>
+
+      </div>
+
+
+      <div class="featured-grid">
+
+        <div class="featured-image reveal">
+
+          <!--
+            Cambia esta imagen por tu pintura
+            principal cuando quieras.
+          -->
+
+          <img
+            src="imagen/pintura-destacada.jpg"
+            alt="Obra pictórica de Juan García, óleo sobre lienzo"
+            loading="lazy"
+            width="1200"
+            height="900"
+          >
+
+        </div>
+
+
+        <div class="featured-info reveal delay-1">
+
+          <span class="eyebrow">
+            Obra en desarrollo
+          </span>
+
+
+          <h3 class="featured-title">
+            Serie
+            <br>
+            en proceso.
+          </h3>
+
+
+          <div class="featured-meta">
+
+            Óleo sobre lienzo<br>
+            2026
+
+          </div>
+
+
+          <p class="featured-description">
+
+            Una investigación pictórica alrededor de
+            la memoria, la nostalgia y la presencia
+            humana.
+
+          </p>
+
+
+          <a
+            href="obra-pintura.html"
+            class="text-link"
+          >
+            Explorar la serie →
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CONTACTO
+  ====================================================== -->
+
+  <section
+    id="contacto"
+    class="contact-section"
+  >
+
+    <div class="section-container">
+
+      <div class="contact-inner">
+
+        <div>
+
+          <span class="section-label reveal">
+            04 · Contacto
+          </span>
+
+
+          <h2 class="contact-title reveal">
+
+            Construyamos una
+            conversación alrededor
+            de la obra.
+
+          </h2>
+
+
+          <p class="contact-text reveal">
+
+            Disponible para exposiciones,
+            colaboraciones, proyectos artísticos
+            y encargos fotográficos.
+
+          </p>
+
+        </div>
+
+
+        <div class="contact-side reveal">
+
+          <a
+            href="mailto:hola@juangarcia.com"
+            class="contact-button"
+          >
+            Contactar →
+          </a>
+
+
+          <nav class="socials" aria-label="Redes sociales">
+
+            <a href="#" aria-label="Instagram de Juan García">
+              Instagram
+            </a>
+
+            <a href="#" aria-label="Behance de Juan García">
+              Behance
+            </a>
+
+            <a
+              href="mailto:hola@juangarcia.com"
+              aria-label="Escribir correo electrónico"
+            >
+              Email
+            </a>
+
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <span>
+      © 2026 Juan García
+    </span>
+
+    <span>
+      Portafolio artístico
+    </span>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        /*
+          ===============================================
+          SCROLL REVEAL
+          ===============================================
+        */
+
+        const revealElements =
+          document.querySelectorAll(".reveal");
+
+        const reducedMotion =
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+
+
+        if (
+          "IntersectionObserver" in window &&
+          !reducedMotion
+        ) {
+
+          const observer =
+            new IntersectionObserver(
+              function (entries) {
+
+                entries.forEach(
+                  function (entry) {
+
+                    if (
+                      entry.isIntersecting
+                    ) {
+
+                      entry.target.classList.add(
+                        "visible"
+                      );
+
+                      observer.unobserve(
+                        entry.target
+                      );
+
+                    }
+
+                  }
+                );
+
+              },
+              {
+                threshold: 0.12,
+
+                rootMargin:
+                  "0px 0px -60px 0px"
+              }
+            );
+
+
+          revealElements.forEach(
+            function (element) {
+
+              observer.observe(element);
+
+            }
+          );
+
+        } else {
+
+          revealElements.forEach(
+            function (element) {
+
+              element.classList.add(
+                "visible"
+              );
+
+            }
+          );
+
+        }
+
+
+        /*
+          ===============================================
+          MOBILE MENU
+          ===============================================
+        */
+
+        const menuButton =
+          document.querySelector(".menu-button");
+
+        const nav =
+          document.getElementById("site-nav");
+
+        const mobilePanel =
+          document.getElementById("mobile-panel");
+
+
+        if (
+          menuButton &&
+          nav &&
+          mobilePanel
+        ) {
+
+          menuButton.addEventListener(
+            "click",
+            function () {
+
+              const isOpen =
+                nav.classList.toggle(
+                  "menu-open"
+                );
+
+              menuButton.setAttribute(
+                "aria-expanded",
+                isOpen
+                  ? "true"
+                  : "false"
+              );
+
+              menuButton.setAttribute(
+                "aria-label",
+                isOpen
+                  ? "Cerrar menú"
+                  : "Abrir menú"
+              );
+
+            }
+          );
+
+
+          mobilePanel
+            .querySelectorAll("a")
+            .forEach(
+              function (link) {
+
+                link.addEventListener(
+                  "click",
+                  function () {
+
+                    nav.classList.remove(
+                      "menu-open"
+                    );
+
+                    menuButton.setAttribute(
+                      "aria-expanded",
+                      "false"
+                    );
+
+                    menuButton.setAttribute(
+                      "aria-label",
+                      "Abrir menú"
+                    );
+
+                  }
+                );
+
+              }
+            );
+
+          // Cierra el menú móvil al pulsar Escape
+          document.addEventListener(
+            "keydown",
+            function (event) {
+
+              if (
+                event.key === "Escape" &&
+                nav.classList.contains("menu-open")
+              ) {
+
+                nav.classList.remove("menu-open");
+
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Abrir menú");
+                menuButton.focus();
+
+              }
+
+            }
+          );
+
+        }
+
+
+        /*
+          ===============================================
+          ACTIVE NAVIGATION
+          ===============================================
+        */
+
+        const sections =
+          document.querySelectorAll(
+            "header[id], section[id]"
+          );
+
+        const navigationLinks =
+          document.querySelectorAll(
+            ".nav-links a, .mobile-panel a"
+          );
+
+
+        if (
+          "IntersectionObserver" in window
+        ) {
+
+          const sectionObserver =
+            new IntersectionObserver(
+              function (entries) {
+
+                entries.forEach(
+                  function (entry) {
+
+                    if (
+                      entry.isIntersecting
+                    ) {
+
+                      const id =
+                        entry.target.id;
+
+                      navigationLinks.forEach(
+                        function (link) {
+
+                          link.classList.remove(
+                            "active"
+                          );
+
+
+                          if (
+                            link.getAttribute(
+                              "href"
+                            ) === "#" + id
+                          ) {
+
+                            link.classList.add(
+                              "active"
+                            );
+
+                          }
+
+                        }
+                      );
+
+                    }
+
+                  }
+                );
+
+              },
+              {
+                threshold: 0.35
+              }
+            );
+
+
+          sections.forEach(
+            function (section) {
+
+              sectionObserver.observe(
+                section
+              );
+
+            }
+          );
+
+        }
+
+
+        /*
+          ===============================================
+          HEADER BLUR ON SCROLL
+          ===============================================
+        */
+
+        function updateNavigation() {
+
+          if (!nav) return;
+
+
+          if (
+            window.scrollY > 40
+          ) {
+
+            nav.style.background =
+              "rgba(7, 17, 23, 0.62)";
+
+            nav.style.backdropFilter =
+              "blur(14px)";
+
+          } else {
+
+            nav.style.background =
+              "rgba(255, 255, 255, 0.025)";
+
+            nav.style.backdropFilter =
+              "blur(8px)";
+
+          }
+
+        }
+
+
+        window.addEventListener(
+          "scroll",
+          updateNavigation,
+          {
+            passive: true
+          }
+        );
+
+
+        updateNavigation();
+
+      }
+
+    );
+
+  </script>
+
+</body>
+</html>
