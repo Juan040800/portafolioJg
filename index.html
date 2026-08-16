@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,15 @@
     content="Portafolio artístico de Juan García — pintura, fotografía y escultura."
   >
 
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Juan García — Artista · Pintura · Fotografía · Escultura">
+  <meta property="og:description" content="Portafolio artístico de Juan García — pintura, fotografía y escultura.">
+  <meta property="og:image" content="imagen/perfil.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <meta name="theme-color" content="#0b1820">
+  <link rel="icon" href="data:,">
 
   <title>Juan García — Artista · Pintura · Fotografía · Escultura</title>
 
@@ -86,11 +95,40 @@
 
     button {
       font: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     ::selection {
       background: var(--sand);
       color: #111;
+    }
+
+    /* Foco visible accesible en toda la página */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--sand);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      z-index: 200;
+      padding: 10px 18px;
+      background: var(--off-white);
+      color: #111;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: top 0.25s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
     }
 
 
@@ -131,6 +169,8 @@
       box-shadow:
         inset 0 1px 1px rgba(255, 255, 255, 0.10),
         0 12px 40px rgba(0, 0, 0, 0.15);
+
+      transition: background 0.35s ease, backdrop-filter 0.35s ease;
     }
 
     .liquid-glass::before {
@@ -185,7 +225,7 @@
 
       padding: 10px 12px 10px 22px;
 
-      border-radius: 999px;
+      border-radius: 28px;
     }
 
     .logo {
@@ -310,11 +350,10 @@
       background: rgba(255,255,255,0.03);
 
       color: white;
-
-      cursor: pointer;
     }
 
     .menu-button span,
+    .menu-button span::before,
     .menu-button span::after {
       content: "";
 
@@ -329,15 +368,39 @@
 
       transform: translateX(-50%);
 
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease, top 0.3s ease;
     }
 
     .menu-button span {
-      top: 17px;
+      top: 20px;
+    }
+
+    .menu-button span::before {
+      top: -6px;
     }
 
     .menu-button span::after {
-      top: 7px;
+      top: 6px;
+    }
+
+    /* Estado abierto: la línea central se oculta y las otras forman una X */
+    .site-nav.menu-open .menu-button span {
+      background: transparent;
+    }
+
+    .site-nav.menu-open .menu-button span::before {
+      top: 0;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .site-nav.menu-open .menu-button span::after {
+      top: 0;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    /* Panel desplegable móvil (oculto en escritorio) */
+    .mobile-panel {
+      display: none;
     }
 
 
@@ -358,17 +421,8 @@
 
       isolation: isolate;
 
-      background:
-        var(--background)
-        url("imagen/perfil.jpg")
-        center center / cover
-        no-repeat;
+      background: var(--background);
     }
-
-    /*
-      IMPORTANTE:
-      imagen/perfil.jpg queda como fondo principal.
-    */
 
     .hero-image {
       position: absolute;
@@ -597,15 +651,19 @@
 
       font-size: 0.75rem;
 
+      border: 1px solid rgba(255,255,255,0.16);
+
       transition:
         color 0.3s ease,
-        background 0.3s ease;
+        background 0.3s ease,
+        border-color 0.3s ease;
     }
 
     .secondary-button:hover {
       color: white;
 
       background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.3);
     }
 
 
@@ -955,7 +1013,8 @@
         url("imagen/escultura-01.jpg");
     }
 
-    .work-card:hover .work-image {
+    .work-card:hover .work-image,
+    .work-card:focus-visible .work-image {
       transform: scale(1.07);
 
       filter: saturate(1.08);
@@ -1047,7 +1106,8 @@
         transform 0.3s ease;
     }
 
-    .work-card:hover .work-arrow {
+    .work-card:hover .work-arrow,
+    .work-card:focus-visible .work-arrow {
       background: var(--off-white);
 
       color: #111;
@@ -1076,125 +1136,4 @@
       align-items: center;
     }
 
-    .featured-image {
-      aspect-ratio: 4 / 3;
-
-      overflow: hidden;
-
-      background: #111;
-    }
-
-    .featured-image img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      transition:
-        transform 0.8s ease;
-    }
-
-    .featured-image:hover img {
-      transform: scale(1.03);
-    }
-
-    .featured-info .eyebrow {
-      color: var(--sand);
-
-      display: block;
-
-      margin-bottom: 20px;
-    }
-
-    .featured-title {
-      font-family: var(--font-display);
-
-      font-size: clamp(
-        3rem,
-        5vw,
-        5rem
-      );
-
-      font-weight: 400;
-
-      line-height: 0.9;
-
-      margin-bottom: 25px;
-    }
-
-    .featured-meta {
-      color: var(--stone);
-
-      font-size: 0.78rem;
-
-      line-height: 1.8;
-
-      margin-bottom: 25px;
-    }
-
-    .featured-description {
-      color: var(--muted);
-
-      font-size: 0.9rem;
-
-      line-height: 1.8;
-
-      margin-bottom: 30px;
-    }
-
-    .text-link {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      text-decoration: none;
-
-      color: white;
-
-      font-size: 0.75rem;
-
-      border-bottom:
-        1px solid
-        rgba(255,255,255,0.35);
-
-      padding-bottom: 5px;
-
-      transition:
-        color 0.3s ease,
-        border-color 0.3s ease;
-    }
-
-    .text-link:hover {
-      color: var(--sand);
-
-      border-color: var(--sand);
-    }
-
-
-    /* =====================================================
-       CONTACT
-    ====================================================== */
-
-    .contact-section {
-      background: #071117;
-
-      border-top:
-        1px solid
-        rgba(255,255,255,0.08);
-    }
-
-    .contact-inner {
-      display: grid;
-
-      grid-template-columns:
-        1fr
-        auto;
-
-      align-items: end;
-
-      gap: 50px;
-    }
-
-  
+    .featured-image
