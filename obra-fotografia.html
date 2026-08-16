@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Serie de fotografía de Juan García.">
+<meta name="theme-color" content="#0b1820">
+<title>Fotografía — Juan García</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --background:#0b1820;
+    --background-deep:#071117;
+    --foreground:#ffffff;
+    --off-white:#eeeae3;
+    --muted:#a7a9ad;
+    --stone:#85888b;
+    --sand:#c9b79c;
+    --font-display:"Instrument Serif", serif;
+    --font-body:"Inter", sans-serif;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    background:var(--background-deep);
+    color:var(--foreground);
+    font-family:var(--font-body);
+    font-weight:300;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  a:focus-visible{outline:2px solid var(--sand);outline-offset:3px;border-radius:4px;}
+
+  /* nav idéntico al del index, para consistencia de marca */
+  nav{
+    position:fixed;top:22px;left:50%;transform:translateX(-50%);
+    z-index:100;display:flex;gap:6px;
+    background:rgba(255,255,255,0.025);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.10);
+    border-radius:999px;padding:6px;
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.10), 0 12px 40px rgba(0,0,0,0.15);
+  }
+  nav a{
+    display:block;text-decoration:none;color:var(--muted);
+    font-size:0.72rem;font-weight:400;
+    padding:9px 16px;border-radius:999px;
+    transition:color .3s ease, background .3s ease;
+  }
+  nav a:hover, nav a.active{color:var(--foreground);}
+  nav a.active{background:rgba(255,255,255,0.08);}
+
+  header.obra-head{
+    padding:min(18vw,180px) 6vw 60px;
+    max-width:900px;
+  }
+  .obra-eyebrow{
+    font-size:0.68rem;font-weight:500;
+    letter-spacing:0.22em;text-transform:uppercase;color:var(--sand);
+    display:block;margin-bottom:20px;
+  }
+  header.obra-head h1{
+    font-family:var(--font-display);font-weight:400;
+    font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.95;letter-spacing:-0.03em;
+  }
+  header.obra-head p{
+    margin-top:22px;color:var(--muted);line-height:1.75;max-width:56ch;font-size:0.96rem;
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:30px;text-decoration:none;color:rgba(255,255,255,0.82);
+    font-size:0.75rem;border-bottom:1px solid rgba(255,255,255,0.3);
+    padding-bottom:5px;transition:color .3s ease, border-color .3s ease;
+  }
+  .back-link:hover{color:var(--sand);border-color:var(--sand);}
+
+  /* grid de la galería */
+  .gallery{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    background:rgba(255,255,255,0.08);padding-bottom:2px;
+  }
+  .gallery figure{
+    position:relative;aspect-ratio:4/5;overflow:hidden;background:#111;cursor:zoom-in;
+  }
+  .gallery img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transform:scale(1.02);filter:saturate(0.9);
+    transition:transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+  }
+  .gallery figure:hover img{transform:scale(1.08);filter:saturate(1.05);}
+  .gallery figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:16px;
+    font-size:0.75rem;color:var(--muted);
+    background:linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    opacity:0;transition:opacity .35s ease;
+  }
+  .gallery figure:hover figcaption{opacity:1;}
+
+  @media (max-width:820px){ .gallery{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .gallery{grid-template-columns:1fr;} }
+
+  /* lightbox simple, sin dependencias */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(5,12,16,0.94);
+    display:none;align-items:center;justify-content:center;z-index:200;padding:5vw;
+  }
+  #lightbox.open{display:flex;}
+  #lightbox img{max-width:100%;max-height:88vh;border-radius:2px;}
+  #lightbox .close{
+    position:absolute;top:24px;right:6vw;color:var(--off-white);
+    font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+    cursor:pointer;border:1px solid rgba(255,255,255,0.3);
+    padding:10px 18px;border-radius:999px;background:none;
+  }
+
+  footer{
+    padding:40px 6vw;text-align:center;color:var(--stone);
+    font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+    border-top:1px solid rgba(255,255,255,0.07);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html#perfil">Perfil</a>
+  <a href="index.html#obra" class="active">Obra</a>
+  <a href="index.html#contacto">Contacto</a>
+</nav>
+
+<header class="obra-head">
+  <span class="obra-eyebrow">01 · Fotografía</span>
+  <h1>Serie en curso</h1>
+  <p>Retratos, luz ambiente y paisaje urbano documental. Selección completa de la serie.</p>
+  <a href="index.html#obra" class="back-link">← Volver a Obra</a>
+</header>
+
+<!--
+  GALERÍA
+  Cada <figure> es una foto dentro de la carpeta imagen/fotografia/.
+  Para agregar una imagen nueva: copiá el bloque <figure>...</figure>,
+  cambiá el src y (si querés) el texto del figcaption.
+-->
+<section class="gallery" id="galeria">
+  <figure onclick="abrir(this)">
+    <img src="imagen/fotografia/01.jpg" alt="Fotografía 01" loading="lazy">
+    <figcaption>Retrato — luz natural</figcaption>
+  </figure>
+  <figure onclick="abrir(this)">
+    <img src="imagen/fotografia/02.jpg" alt="Fotografía 02" loading="lazy">
+    <figcaption>Salón — color ambiente</figcaption>
+  </figure>
+  <figure onclick="abrir(this)">
+    <img src="imagen/fotografia/03.jpg" alt="Fotografía 03" loading="lazy">
+    <figcaption>Detalle</figcaption>
+  </figure>
+  <!-- agregá más <figure> acá, una por foto -->
+</section>
+
+<footer>© 2026 Juan García — Fotografía</footer>
+
+<div id="lightbox" onclick="cerrar(event)">
+  <button class="close" onclick="cerrar(event)" type="button">Cerrar ✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function abrir(fig){
+    const src = fig.querySelector('img').src;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function cerrar(e){
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') cerrar(e);
+  });
+</script>
+
+</body>
+</html>
