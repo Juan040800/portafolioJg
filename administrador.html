@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1820">
+<title>Panel — Administrar portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --background:#0b1820;
+    --background-deep:#071117;
+    --foreground:#ffffff;
+    --off-white:#eeeae3;
+    --muted:#a7a9ad;
+    --stone:#85888b;
+    --sand:#c9b79c;
+    --danger:#c96b5c;
+    --font-display:"Instrument Serif", serif;
+    --font-body:"Inter", sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--background-deep);
+    color:var(--foreground);
+    font-family:var(--font-body);
+    font-weight:300;
+    padding:min(18vw,150px) 6vw 10vw;
+  }
+
+  /* nav idéntico al del index, para consistencia de marca */
+  .site-nav{
+    position:fixed;top:22px;left:50%;transform:translateX(-50%);
+    width:min(92%,1180px);z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 12px 10px 22px;border-radius:28px;
+    background:rgba(255,255,255,0.025);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.10);
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.10), 0 12px 40px rgba(0,0,0,0.15);
+  }
+  .site-nav .logo{
+    text-decoration:none;font-family:var(--font-display);
+    font-size:1.4rem;color:var(--foreground);letter-spacing:-0.03em;
+  }
+  .site-nav .logo span{color:var(--sand);}
+  .site-nav .back{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 16px;border-radius:999px;
+    text-decoration:none;color:var(--muted);
+    font-size:0.72rem;transition:color .3s ease, background .3s ease;
+  }
+  .site-nav .back:hover{color:var(--foreground);background:rgba(255,255,255,0.08);}
+
+  h1{
+    font-family:var(--font-display);font-weight:400;
+    font-size:clamp(2rem,5vw,3rem);line-height:0.95;letter-spacing:-0.03em;
+    margin:0 0 12px;
+  }
+  .lead{color:var(--muted);margin:0 0 44px;max-width:520px;line-height:1.7;font-size:0.95rem;}
+
+  .card{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.025);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.10);
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.10), 0 12px 40px rgba(0,0,0,0.15);
+    border-radius:16px;
+    padding:28px;
+    margin-bottom:24px;
+    max-width:620px;
+  }
+  .card h2{
+    font-size:0.68rem;font-weight:500;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--sand);
+    margin:0 0 20px;
+  }
+  label{
+    display:block;
+    font-size:0.78rem;
+    color:var(--muted);
+    margin-bottom:6px;
+    margin-top:16px;
+  }
+  label:first-of-type{margin-top:0;}
+  input[type="text"], input[type="password"], select{
+    width:100%;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14);
+    color:var(--foreground);
+    padding:11px 13px;
+    border-radius:8px;
+    font-family:var(--font-body);
+    font-size:0.92rem;
+  }
+  input:focus, select:focus{outline:2px solid var(--sand);outline-offset:1px;}
+  input[type="file"]{
+    width:100%;
+    margin-top:6px;
+    color:var(--muted);
+    font-size:0.85rem;
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  /* botones tipo "píldora" idénticos al index */
+  .btn{
+    margin-top:22px;
+    width:100%;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--font-body);
+    font-size:0.75rem;font-weight:500;
+    letter-spacing:0.04em;
+    padding:15px;
+    border:none;
+    border-radius:999px;
+    background:var(--off-white);
+    color:#111;
+    cursor:pointer;
+    transition:transform .3s ease, background .3s ease;
+  }
+  .btn:hover{transform:scale(1.015);background:#fff;}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.16);
+    color:rgba(255,255,255,0.82);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.06);color:#fff;}
+
+  .status{
+    margin-top:14px;
+    font-size:0.85rem;
+    line-height:1.5;
+    padding:10px 0;
+    display:none;
+  }
+  .status.show{display:block;}
+  .status.ok{color:#9fbf8f;}
+  .status.err{color:var(--danger);}
+  .status.pending{color:var(--muted);}
+
+  .file-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+    gap:12px;
+    margin-top:18px;
+  }
+  .file-item{
+    position:relative;
+    background:#111;
+    border:1px solid rgba(255,255,255,0.10);
+    border-radius:8px;
+    overflow:hidden;
+    aspect-ratio:1;
+  }
+  .file-item img{width:100%;height:100%;object-fit:cover;display:block;}
+  .file-item .name{
+    position:absolute;bottom:0;left:0;right:0;
+    background:rgba(0,0,0,0.7);
+    font-size:0.62rem;
+    padding:4px 6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .file-item .del{
+    position:absolute;top:5px;right:5px;
+    width:22px;height:22px;
+    border-radius:50%;
+    border:none;
+    background:rgba(0,0,0,0.65);
+    color:var(--off-white);
+    cursor:pointer;
+    font-size:0.75rem;
+    line-height:1;
+  }
+  .file-item .del:hover{background:var(--danger);}
+  .empty-note{color:var(--muted);font-size:0.85rem;}
+
+  .note{
+    font-size:0.78rem;
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:24px;
+    max-width:600px;
+  }
+  .note a{color:var(--sand);}
+  .note code{
+    background:rgba(255,255,255,0.08);
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:0.82em;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="logo">Juan <span>García</span></a>
+  <a href="index.html" class="back">← Volver al sitio</a>
+</nav>
+
+<h1>Panel del portafolio</h1>
+<p class="lead">Subí, revisá y borrá las imágenes de tu repositorio de GitHub directo desde acá — sin entrar a la web de GitHub cada vez.</p>
+
+<div class="card">
+  <h2>Conexión</h2>
+  <label for="owner">Usuario de GitHub</label>
+  <input type="text" id="owner" value="Juan040800">
+
+  <label for="repo">Repositorio</label>
+  <input type="text" id="repo" value="portafolioJg">
+
+  <label for="branch">Rama</label>
+  <input type="text" id="branch" value="main">
+
+  <label for="token">Token de acceso personal</label>
+  <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+  <p class="note" style="margin-top:8px;">
+    Se usa solo en tu navegador para hablar con la API de GitHub — no se guarda en ningún servidor. No queda guardado al cerrar la pestaña, así que lo vas a pegar cada vez que entrés acá.
+    Generalo en <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> (fine-grained), dándole permiso solo de <strong>Contents: Read and write</strong> sobre este repositorio.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Subir imagen</h2>
+  <label for="folder">Carpeta destino</label>
+  <input type="text" id="folder" value="imagen" list="folderOptions">
+  <datalist id="folderOptions">
+    <option value="imagen">
+    <option value="imagen/fotografia">
+    <option value="imagen/pintura">
+    <option value="imagen/escultura">
+  </datalist>
+  <p class="note" style="margin-top:6px;">
+    Usa <code>imagen</code> para las fotos principales (perfil, portada de cada tarjeta).
+    Usa <code>imagen/fotografia</code>, <code>imagen/pintura</code> o <code>imagen/escultura</code>
+    para las galerías completas de cada página de obra.
+  </p>
+
+  <label for="filename">Nombre del archivo (opcional — si lo dejás vacío usa el original)</label>
+  <input type="text" id="filename" placeholder="ej: pintura-01.jpg">
+
+  <label for="filepick">Archivo</label>
+  <input type="file" id="filepick" accept="image/*">
+
+  <button class="btn" id="uploadBtn">Subir a GitHub</button>
+  <div class="status" id="uploadStatus"></div>
+</div>
+
+<div class="card">
+  <h2>Imágenes actuales</h2>
+  <button class="btn btn-ghost" id="refreshBtn">Actualizar lista</button>
+  <div class="status" id="listStatus"></div>
+  <div class="file-grid" id="fileGrid"></div>
+</div>
+
+<p class="note">
+  Este panel no queda enlazado desde tu portafolio público — guardá el link vos.
+  Tu token da permiso de escritura sobre el repo: no lo compartas, y si sospechás que se filtró, revocalo en la misma página de GitHub donde lo creaste.
+</p>
+
+<script>
+  function cfg(){
+    return {
+      owner: document.getElementById('owner').value.trim(),
+      repo: document.getElementById('repo').value.trim(),
+      branch: document.getElementById('branch').value.trim() || 'main',
+      token: document.getElementById('token').value.trim(),
+    };
+  }
+
+  function setStatus(el, text, kind){
+    el.textContent = text;
+    el.className = 'status show ' + (kind || '');
+  }
+
+  function api(path, opts, token){
+    return fetch('https://api.github.com/repos' + path, Object.assign({
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json'
+      }
+    }, opts || {}));
+  }
+
+  function fileToBase64(file){
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onload = function(){ resolve(reader.result.split(',')[1]); };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ---- Subida ----
+  document.getElementById('uploadBtn').addEventListener('click', async function(){
+    var status = document.getElementById('uploadStatus');
+    var c = cfg();
+    var file = document.getElementById('filepick').files[0];
+    var folder = document.getElementById('folder').value.trim().replace(/^\/|\/$/g,'');
+    var customName = document.getElementById('filename').value.trim();
+
+    if (!c.owner || !c.repo || !c.token){ setStatus(status,'Completá usuario, repositorio y token.','err'); return; }
+    if (!file){ setStatus(status,'Elegí un archivo primero.','err'); return; }
+
+    var name = customName || file.name;
+    var path = folder ? (folder + '/' + name) : name;
+
+    this.disabled = true;
+    setStatus(status, 'Subiendo ' + name + '…', 'pending');
+
+    try{
+      var content = await fileToBase64(file);
+      var sha = null;
+
+      // ¿Ya existe? si es así, hay que mandar su sha para actualizarlo
+      var existing = await api('/' + c.owner + '/' + c.repo + '/contents/' + encodeURI(path) + '?ref=' + c.branch, {}, c.token);
+      if (existing.status === 200){
+        var data = await existing.json();
+        sha = data.sha;
+      }
+
+      var body = {
+        message: (sha ? 'Actualizar ' : 'Agregar ') + path,
+        content: content,
+        branch: c.branch
+      };
+      if (sha) body.sha = sha;
+
+      var put = await api('/' + c.owner + '/' + c.repo + '/contents/' + encodeURI(path), {
+        method: 'PUT',
+        body: JSON.stringify(body)
+      }, c.token);
+
+      if (put.ok){
+        setStatus(status, '✓ Subida: ' + path, 'ok');
+        document.getElementById('filepick').value = '';
+        document.getElementById('filename').value = '';
+        loadFiles();
+      } else {
+        var err = await put.json();
+        setStatus(status, 'Error: ' + (err.message || put.status), 'err');
+      }
+    } catch(e){
+      setStatus(status, 'Error de red: ' + e.message, 'err');
+    } finally {
+      this.disabled = false;
+    }
+  });
+
+  // ---- Listado ----
+  async function loadFiles(){
+    var status = document.getElementById('listStatus');
+    var grid = document.getElementById('fileGrid');
+    var c = cfg();
+    var folder = document.getElementById('folder').value.trim().replace(/^\/|\/$/g,'') || 'imagen';
+
+    if (!c.owner || !c.repo || !c.token){ setStatus(status,'Completá usuario, repositorio y token.','err'); return; }
+
+    setStatus(status, 'Cargando…', 'pending');
+    grid.innerHTML = '';
+
+    try{
+      var res = await api('/' + c.owner + '/' + c.repo + '/contents/' + folder + '?ref=' + c.branch, {}, c.token);
+      if (!res.ok){
+        if (res.status === 404){ setStatus(status,'La carpeta "' + folder + '" todavía no existe en el repo.','pending'); return; }
+        var err = await res.json();
+        setStatus(status, 'Error: ' + (err.message || res.status), 'err');
+        return;
+      }
+      var files = await res.json();
+      var images = files.filter(function(f){ return f.type === 'file' && /\.(jpe?g|png|webp|gif|svg)$/i.test(f.name); });
+
+      if (images.length === 0){
+        setStatus(status, '', '');
+        grid.innerHTML = '<p class="empty-note">No hay imágenes todavía en "' + folder + '".</p>';
+        return;
+      }
+
+      setStatus(status, images.length + ' imagen(es)', 'ok');
+      images.forEach(function(f){
+        var item = document.createElement('div');
+        item.className = 'file-item';
+        item.innerHTML =
+          '<img src="' + f.download_url + '" alt="' + f.name + '">' +
+          '<div class="name">' + f.name + '</div>' +
+          '<button class="del" title="Borrar" data-path="' + f.path + '" data-sha="' + f.sha + '">✕</button>';
+        grid.appendChild(item);
+      });
+
+      grid.querySelectorAll('.del').forEach(function(btn){
+        btn.addEventListener('click', async function(){
+          if (!confirm('¿Borrar ' + btn.dataset.path + ' del repositorio?')) return;
+          var c2 = cfg();
+          var del = await api('/' + c2.owner + '/' + c2.repo + '/contents/' + encodeURI(btn.dataset.path), {
+            method: 'DELETE',
+            body: JSON.stringify({
+              message: 'Borrar ' + btn.dataset.path,
+              sha: btn.dataset.sha,
+              branch: c2.branch
+            })
+          }, c2.token);
+          if (del.ok){ loadFiles(); } else { alert('No se pudo borrar.'); }
+        });
+      });
+    } catch(e){
+      setStatus(status, 'Error de red: ' + e.message, 'err');
+    }
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click', loadFiles);
+</script>
+</body>
+</html>
