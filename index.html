@@ -3,111 +3,474 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio — Fotografía · Pintura · Escultura</title>
+<title>Juan García — Fotografía · Pintura · Escultura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1A1A1A;
-    --fg:#EDEAE4;
+    --carbon:#1A1A1A;
+    --carbon-2:#141310;
+    --off-white:#EDEAE4;
     --stone:#8C8880;
     --sand:#C9B79C;
-    --bg-rgb:26,26,26;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--fg);
+    background:var(--carbon);
+    color:var(--off-white);
     font-family:'Inter',sans-serif;
     font-weight:300;
     overflow-x:hidden;
-    cursor:default;
   }
-  ::selection{background:var(--sand);color:var(--bg);}
+  ::selection{background:var(--sand);color:var(--carbon);}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
 
-  /* --- utility --- */
+  .display{font-family:'Cormorant Garamond',serif;font-weight:500;}
   .eyebrow{
     font-family:'Inter',sans-serif;
     text-transform:uppercase;
-    letter-spacing:0.28em;
+    letter-spacing:0.24em;
     font-size:0.7rem;
     color:var(--stone);
     font-weight:500;
   }
 
-  /* --- glass circle motif (signature element) --- */
-  .glass-circle{
-    position:absolute;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, rgba(237,234,228,0.14), rgba(201,183,156,0.03) 60%, transparent 75%);
-    border:1px solid rgba(237,234,228,0.10);
-    backdrop-filter:blur(2px);
-    pointer-events:none;
-  }
-
-  /* --- nav --- */
+  /* ---------- NAV ---------- */
   nav{
     position:fixed;
-    top:0;left:0;right:0;
+    top:24px;
+    left:50%;
+    transform:translateX(-50%);
     z-index:100;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:2rem clamp(1.5rem,5vw,4rem);
-    mix-blend-mode:difference;
+    gap:4px;
+    background:rgba(20,19,16,0.6);
+    border:1px solid rgba(237,234,228,0.12);
+    border-radius:999px;
+    padding:6px;
+    backdrop-filter:blur(10px);
   }
-  nav .mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;letter-spacing:0.02em;}
-  nav ul{list-style:none;display:flex;gap:2.5rem;}
   nav a{
-    color:var(--fg);
     text-decoration:none;
-    font-size:0.78rem;
+    font-family:'Unbounded',sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
     text-transform:uppercase;
-    letter-spacing:0.16em;
-    opacity:0.75;
-    transition:opacity .3s ease;
+    padding:10px 20px;
+    border-radius:999px;
+    color:var(--stone);
+    transition:background .35s ease, color .35s ease;
   }
-  nav a:hover, nav a:focus-visible{opacity:1;}
-  nav a:focus-visible{outline:1px solid var(--sand);outline-offset:4px;}
+  nav a:hover, nav a:focus-visible{color:var(--off-white);}
+  nav a.active{background:var(--sand);color:var(--carbon);}
+  nav a:focus-visible{outline:1px solid var(--sand);outline-offset:2px;}
 
-  /* --- hero --- */
+  /* ---------- HERO ---------- */
   .hero{
-    height:100svh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
     position:relative;
+    height:100vh;
+    min-height:640px;
+    display:flex;
+    align-items:flex-end;
     overflow:hidden;
   }
-  .hero h1{
-    font-family:'Unbounded',sans-serif;
-    font-weight:900;
-    line-height:0.92;
-    font-size:clamp(3.2rem,11vw,9rem);
-    letter-spacing:-0.01em;
-    position:relative;
-    z-index:2;
+  .hero-texture{
+    position:absolute;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(201,183,156,0.08), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(140,136,128,0.10), transparent 50%);
   }
-  .hero .sub{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:clamp(1rem,2vw,1.4rem);
-    color:var(--sand);
-    margin-top:1.2rem;
+  .hero-ring{
+    position:absolute;
+    width:min(64vw,720px);
+    height:min(64vw,720px);
+    right:-14%;
+    top:8%;
+    border-radius:50%;
+    border:1px solid rgba(201,183,156,0.35);
+    opacity:.6;
+  }
+  .hero-ring::before{
+    content:"";
+    position:absolute;
+    inset:12%;
+    border-radius:50%;
+    border:1px solid rgba(201,183,156,0.22);
+  }
+  .hero-ring::after{
+    content:"";
+    position:absolute;
+    inset:26%;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(201,183,156,0.5), rgba(201,183,156,0.02) 70%);
+    filter:blur(2px);
+    /* Cuando tengas tu foto: reemplaza el background de arriba por
+       background-image:url('img/perfil.jpg'); background-size:cover; background-position:50% 30%; */
+  }
+  .hero-fade{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, var(--carbon) 4%, rgba(26,26,26,0.75) 26%, rgba(26,26,26,0) 58%);
+  }
+  .hero-content{
     position:relative;
     z-index:2;
-    letter-spacing:0.02em;
+    width:100%;
+    padding:0 6vw 7vw;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .hero-eyebrow{display:flex;align-items:center;gap:12px;}
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--sand);}
+  .hero h1{
+    font-size:clamp(3rem,11vw,9rem);
+    line-height:0.86;
+    font-weight:500;
+    color:var(--off-white);
+  }
+  .hero-sub{
+    max-width:520px;
+    font-size:1rem;
+    font-weight:300;
+    color:var(--stone);
+    line-height:1.6;
+  }
+  .hero-disciplines{
+    font-family:'Unbounded',sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    color:var(--sand);
+    text-transform:uppercase;
   }
   .scroll-cue{
     position:absolute;
-    bottom:2.8rem;
-    left:50%;
-    transform:translateX(-50%);
+    left:6vw;
+    bottom:28px;
+    z-index:2;
     display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Unbounded',sans-serif;
+    font-size:0.62rem;
+    letter-spacing:0.2em;
+    color:var(--stone);
+    text-transform:uppercase;
+  }
+  .scroll-cue .line{width:34px;height:1px;background:var(--stone);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{
+    content:"";position:absolute;left:-100%;top:0;width:100%;height:100%;
+    background:var(--sand);
+    animation:travel 2.6s ease-in-out infinite;
+  }
+  @keyframes travel{ to{ left:100%; } }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:min(14vw,140px) 6vw;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:64px;
+    border-bottom:1px solid rgba(237,234,228,0.1);
+    padding-bottom:22px;
+  }
+  .section-head h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:500;line-height:1;}
+  .section-num{font-family:'Unbounded',sans-serif;font-size:0.75rem;color:var(--stone);letter-spacing:0.1em;}
+
+  /* ---------- SOBRE MÍ ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:min(8vw,90px);
+    align-items:center;
+  }
+  .about-portrait{position:relative;aspect-ratio:3/4;}
+  .about-ring{
+    position:absolute;
+    width:74%;height:74%;
+    border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #E4D3B4, var(--sand) 55%, #a68f6c 100%);
+    top:-8%;right:-12%;
+    z-index:1;
+  }
+  .about-photo{
+    position:absolute;inset:0;z-index:2;
+    border-radius:6px;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(20,18,14,0) 55%, rgba(10,9,7,0.55) 100%), var(--carbon-2);
+    /* reemplaza con: background-image:linear-gradient(...), url('img/perfil.jpg'); background-size:cover; background-position:50% 22%; */
+  }
+  .about-copy .eyebrow{margin-bottom:18px;display:block;}
+  .about-copy h2{font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:500;line-height:1.08;margin-bottom:22px;}
+  .about-copy p{color:var(--stone);line-height:1.75;max-width:520px;margin-bottom:28px;font-size:0.98rem;}
+  .skills-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .skills-row span{
+    border:1px solid rgba(237,234,228,0.18);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.78rem;
+    color:var(--off-white);
+  }
+
+  /* ---------- CATÁLOGO ---------- */
+  .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(237,234,228,0.08);}
+  .tile{
+    position:relative;
+    aspect-ratio:3/4;
+    background:var(--carbon-2);
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    padding:28px;
+    isolation:isolate;
+    text-decoration:none;
+  }
+  .tile-art{
+    position:absolute;inset:0;
+    transform:scale(1.02);
+    transition:transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+    filter:saturate(0.85);
+  }
+  .tile:hover .tile-art{transform:scale(1.1);filter:saturate(1.1);}
+  .tile:nth-child(1) .tile-art{background:
+      radial-gradient(circle at 72% 28%, rgba(140,136,128,0.5), transparent 55%),
+      linear-gradient(200deg,#2c2a25,#100f0d 75%);
+      /* reemplaza por: background-image:linear-gradient(180deg, rgba(15,13,10,0) 45%, rgba(10,9,7,0.92) 100%), url('img/fotografia-01.jpg'); background-size:cover; background-position:72% 28%; */
+  }
+  .tile:nth-child(2) .tile-art{background:
+      radial-gradient(circle at 70% 75%, rgba(140,136,128,0.55), transparent 55%),
+      linear-gradient(200deg,#26241f,#0f0e0c 75%);}
+  .tile:nth-child(3) .tile-art{background:
+      radial-gradient(circle at 50% 30%, rgba(237,234,228,0.22), transparent 55%),
+      linear-gradient(200deg,#242220,#0d0c0b 75%);}
+  .tile-shade{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 45%, transparent 70%);}
+  .tile-content{position:relative;z-index:2;width:100%;}
+  .tile-index{font-family:'Unbounded',sans-serif;font-size:0.68rem;color:var(--sand);letter-spacing:0.16em;display:block;margin-bottom:10px;}
+  .tile h3{font-family:'Unbounded',sans-serif;font-size:clamp(1.2rem,2.1vw,1.7rem);font-weight:700;line-height:1.05;}
+  .tile p{color:var(--stone);font-size:0.82rem;margin-top:8px;max-width:220px;}
+  .tile-arrow{
+    position:absolute;top:24px;right:24px;width:34px;height:34px;
+    border-radius:50%;border:1px solid rgba(237,234,228,0.3);
+    display:flex;align-items:center;justify-content:center;z-index:2;
+    transition:background .35s ease, border-color .35s ease, transform .35s ease;
+  }
+  .tile:hover .tile-arrow{background:var(--sand);border-color:var(--sand);transform:rotate(45deg);}
+  .tile-arrow svg{width:14px;height:14px;stroke:var(--off-white);transition:stroke .35s ease;}
+  .tile:hover .tile-arrow svg{stroke:var(--carbon);}
+
+  /* ---------- CONTACTO ---------- */
+  .contact{background:var(--carbon-2);border-top:1px solid rgba(237,234,228,0.1);}
+  .contact-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:40px;}
+  .contact h2{font-size:clamp(2.4rem,6vw,4.5rem);font-weight:500;line-height:0.95;max-width:640px;}
+  .contact-side{display:flex;flex-direction:column;gap:22px;align-items:flex-start;}
+  .btn-outline{
+    font-family:'Unbounded',sans-serif;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    padding:16px 30px;border:1px solid var(--off-white);border-radius:999px;
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    transition:background .35s ease, color .35s ease;
+  }
+  .btn-outline:hover{background:var(--sand);border-color:var(--sand);color:var(--carbon);}
+  .social-list{display:flex;gap:22px;font-size:0.85rem;color:var(--stone);}
+  .social-list a{text-decoration:none;}
+  .social-list a:hover{color:var(--sand);}
+
+  footer{
+    padding:26px 6vw 34px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    color:var(--stone);font-size:0.75rem;letter-spacing:0.04em;
+    border-top:1px solid rgba(237,234,228,0.06);
+  }
+
+  @media (max-width:820px){
+    nav{top:16px;padding:5px;}
+    nav a{padding:8px 14px;font-size:0.6rem;}
+    .about{grid-template-columns:1fr;}
+    .about-portrait{max-width:280px;margin:0 auto 40px;}
+    .catalog{grid-template-columns:1fr;}
+    .tile{aspect-ratio:4/3;}
+    .section-head{flex-direction:column;align-items:flex-start;gap:8px;}
+    .contact-inner{flex-direction:column;align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .tile-art{transition:none;}
+    .scroll-cue .line::after{animation:none;}
+    .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+    #perfil .hero-ring, #perfil .hero-content, #perfil .hero-texture{transform:none !important;}
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(46px);transition:opacity 1s cubic-bezier(.16,.8,.24,1), transform 1s cubic-bezier(.16,.8,.24,1);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  .reveal-1{transition-delay:.08s;}
+  .reveal-2{transition-delay:.18s;}
+  .reveal-3{transition-delay:.28s;}
+  .hero-ring, .hero-texture{will-change:transform;}
+  .hero-content, .scroll-cue{will-change:transform, opacity;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#perfil" class="active">Perfil</a>
+  <a href="#obra">Obra</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<header class="hero" id="perfil">
+  <div class="hero-texture"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span class="eyebrow">Portafolio 2026</span>
+    </div>
+    <h1 class="display">Juan<br>García</h1>
+    <p class="hero-sub">Explorando la forma, la luz y el material a través de tres disciplinas. Cada pieza es un fragmento de la misma pregunta.</p>
+    <div class="hero-disciplines">Fotografía · Pintura · Escultura</div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span> Desplázate</div>
+</header>
+
+<section id="sobre-mi">
+  <div class="about">
+    <div class="about-portrait reveal">
+      <div class="about-ring"></div>
+      <div class="about-photo"></div>
+    </div>
+    <div class="about-copy reveal reveal-2">
+      <span class="eyebrow">Sobre mí</span>
+      <h2 class="display">Un mismo lenguaje, tres materiales</h2>
+      <p>Trabajo desde hace más de diez años cruzando la fotografía, la pintura y la escultura, buscando cómo una misma idea cambia de piel según el medio que la contiene. Mi proceso empieza siempre en el cuaderno, antes que en la cámara o el pincel.</p>
+      <div class="skills-row">
+        <span>Fotografía analógica</span>
+        <span>Óleo y pigmento</span>
+        <span>Talla en madera</span>
+        <span>Instalación</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="obra">
+  <div class="section-head reveal">
+    <h2 class="display">Índice de obra</h2>
+    <span class="section-num">01 — 03</span>
+  </div>
+  <div class="catalog">
+    <a class="tile reveal" href="#">
+      <div class="tile-art"></div>
+      <div class="tile-shade"></div>
+      <div class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+      <div class="tile-content">
+        <span class="tile-index">01 · Serie en curso</span>
+        <h3>Fotografía</h3>
+        <p>Retratos, luz ambiente y paisaje urbano documental.</p>
+      </div>
+    </a>
+    <a class="tile reveal reveal-1" href="#">
+      <div class="tile-art"></div>
+      <div class="tile-shade"></div>
+      <div class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+      <div class="tile-content">
+        <span class="tile-index">02 · 18 obras</span>
+        <h3>Pintura</h3>
+        <p>Óleo sobre lienzo, capas y veladuras de color terroso.</p>
+      </div>
+    </a>
+    <a class="tile reveal reveal-2" href="#">
+      <div class="tile-art"></div>
+      <div class="tile-shade"></div>
+      <div class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+      <div class="tile-content">
+        <span class="tile-index">03 · Objeto</span>
+        <h3>Escultura</h3>
+        <p>Piezas talladas en madera y fundición en bronce.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="contact-inner reveal">
+    <h2 class="display">Hablemos de tu próxima pieza</h2>
+    <div class="contact-side">
+      <a class="btn-outline" href="mailto:hola@juangarcia.com">Guardar contacto →</a>
+      <div class="social-list">
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">Correo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Juan García</span>
+  <span>Estudio abierto con cita previa</span>
+</footer>
+
+<script>
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  var ring = document.querySelector('.hero-ring');
+  var texture = document.querySelector('.hero-texture');
+  var content = document.querySelector('.hero-content');
+  var cue = document.querySelector('.scroll-cue');
+  var heroHeight = window.innerHeight;
+  var ticking = false;
+
+  function updateParallax(){
+    var y = window.scrollY;
+    var progress = Math.min(y / heroHeight, 1);
+    if (ring) ring.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+    if (texture) texture.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+    if (content){
+      content.style.transform = 'translateY(' + (y * 0.34) + 'px)';
+      content.style.opacity = 1 - progress * 1.1;
+    }
+    if (cue) cue.style.opacity = 1 - progress * 3;
+    ticking = false;
+  }
+
+  function onScroll(){
+    if (!ticking && !reduceMotion){
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }
+
+  if (!reduceMotion){
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', function(){ heroHeight = window.innerHeight; });
+    updateParallax();
+  }
+</script>
+</body>
+</html>
     flex-direction:column;
     align-items:center;
     gap:0.6rem;
