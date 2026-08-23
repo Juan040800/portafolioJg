@@ -2277,8 +2277,12 @@
 
           <nav class="socials" aria-label="Redes sociales">
 
-            <a href="#" aria-label="Instagram de Juan García">
-              Instagram
+            <a href="https://www.instagram.com/jg_art05" target="_blank" rel="noopener" aria-label="Instagram de arte de Juan García">
+              Instagram · Arte
+            </a>
+
+            <a href="https://www.instagram.com/jg_photography04" target="_blank" rel="noopener" aria-label="Instagram de fotografía de Juan García">
+              Instagram · Fotografía
             </a>
 
             <a href="#" aria-label="Behance de Juan García">
@@ -2561,6 +2565,44 @@
                             link.classList.add(
                               "active"
                             );
+
+                          }
+
+                        }
+                      );
+
+                    }
+
+                  }
+                );
+
+              },
+              {
+                threshold: 0.4,
+
+                rootMargin:
+                  "-100px 0px -50% 0px"
+              }
+            );
+
+
+          sections.forEach(
+            function (section) {
+
+              sectionObserver.observe(section);
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
 
                           }
 
